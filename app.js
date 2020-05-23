@@ -11,12 +11,11 @@ const outputPath = path.join(OUTPUT_DIR, 'team.html');
 const render = require('./lib/htmlRenderer');
 
 const roleSelector = async () => {
-  const roles = ['Engineer', 'Intern'];
   const queryRole = await inquirer.prompt({
     type: 'list',
     name: 'role',
     message: 'What type of employee do you want to add?',
-    choices: roles,
+    choices: ['Engineer', 'Intern'],
   });
   const role = queryRole.role.toLowerCase();
   return role;
@@ -84,6 +83,9 @@ const createEmployee = async (role) => {
   }
 };
 
+const createTeam = () => {
+
+}
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will
 // generate and return a block of HTML including templated divs for each employee!
