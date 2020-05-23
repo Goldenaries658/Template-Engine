@@ -4,6 +4,7 @@ const Intern = require('./lib/Intern');
 const inquirer = require('inquirer');
 const path = require('path');
 const fs = require('fs');
+const colors = require('colors');
 
 const OUTPUT_DIR = path.resolve(__dirname, 'output');
 const outputPath = path.join(OUTPUT_DIR, 'team.html');
@@ -22,6 +23,9 @@ const roleSelector = async () => {
 };
 
 const createEmployee = async (role) => {
+  if (!role) {
+    role = await roleSelector();
+  }
   if (role != 'manager' && role != 'engineer' && role != 'intern') {
     throw new Error("I don't know how but you picked an invalid option");
   }
@@ -83,9 +87,48 @@ const createEmployee = async (role) => {
   }
 };
 
-const createTeam = () => {
+const createTeam = async () => {
+  console.log('Welcome to the Template Engine!'.blue.bold);
+  console.log('First, enter in manager details:'.green);
 
-}
+  // Function to confirm user input
+  const confirmSelection = async (employee) => {
+    console.log('-------------------------'.bold.green);
+    console.log('Name: '.bold + employee.name.blue);
+    console.log('ID: '.bold + employee.id.blue);
+    console.log('Email: '.bold + employee.email.blue);
+    if ('officeNumber' in employee) {
+      console.log('Office Number: '.bold + employee.officeNumber.blue);
+    } else if ('gitHub' in employee) {
+      console.log('GitHub: '.bold + employee.gitHub.blue);
+    } else {
+      console.log('School: '.bold + employee.school.blue);
+    }
+    console.log('-------------------------'.bold.green);
+    const selection = await inquirer.prompt({
+      type: 'list',
+      name: 'selection',
+      message: 'Do you want to save this?'.red,
+      choices: ['Yes', 'No'],
+    });
+
+    if (selection.selection === 'Yes') {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
+  let managerChosen = false;
+  while (!managerChosen) {
+    const manager = await createEmployee('manager');
+    managerChosen = await confirmSelection(manager);
+
+  }
+  console.log('Next add a team member:'.green);
+};
+
+createTeam();
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will
 // generate and return a block of HTML including templated divs for each employee!
