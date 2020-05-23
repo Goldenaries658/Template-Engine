@@ -10,6 +10,18 @@ const outputPath = path.join(OUTPUT_DIR, 'team.html');
 
 const render = require('./lib/htmlRenderer');
 
+const roleSelector = async () => {
+  const roles = ['Engineer', 'Intern'];
+  const queryRole = await inquirer.prompt({
+    type: 'list',
+    name: 'role',
+    message: 'What type of employee do you want to add?',
+    choices: roles,
+  });
+  const role = queryRole.role.toLowerCase();
+  return role;
+};
+
 const createEmployee = async (role) => {
   if (role != 'manager' && role != 'engineer' && role != 'intern') {
     throw new Error("I don't know how but you picked an invalid option");
@@ -21,7 +33,7 @@ const createEmployee = async (role) => {
     message: `Enter ${role}'s name:`,
   });
   name = name.name;
-  
+
   // Array of personalised questions using name
   const questions = {
     id: { type: 'input', name: 'id', message: `Enter ${name}'s ID:` },
