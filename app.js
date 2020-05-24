@@ -4,7 +4,6 @@ const Intern = require('./lib/Intern');
 const inquirer = require('inquirer');
 const path = require('path');
 const fs = require('fs');
-const colors = require('colors');
 const header = require('./lib/Header');
 
 const OUTPUT_DIR = path.resolve(__dirname, 'output');
