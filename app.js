@@ -144,16 +144,14 @@ const createTeam = async () => {
     const selection = await inquirer.prompt({
       type: 'list',
       name: 'selection',
-      message: 'Are you done adding employees?'.red,
+      message: 'Are you done adding employees? (This will write the html file)'
+        .red,
       choices: ['Yes', 'No'],
     });
 
     if (selection.selection === 'Yes') {
-      console.log('true');
-
       return true;
     } else {
-      console.log('false');
       return false;
     }
   };
@@ -191,8 +189,17 @@ const createTeam = async () => {
     // Confirming whether list is complete
     employeeListComplete = await confirmEmployees(teamArray);
   }
+  console.clear();
+  console.log(header);
+  console.log('Writing File!'.magenta.bold);
+  fs.writeFile('team.html', render(teamArray), (err) => {
+    if (err) {
+      throw err;
+    }
+    console.log
+    console.log('Done!'.magenta.bold);
+  });
 };
-
 createTeam();
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will
