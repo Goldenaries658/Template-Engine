@@ -191,7 +191,7 @@ const createTeam = async () => {
   console.clear();
   console.log(header);
   console.log('Writing File!'.magenta.bold);
-  fs.writeFile('team.html', render(teamArray), (err) => {
+  fs.writeFile(__dirname + '/output/team.html', render(teamArray), (err) => {
     if (err) {
       throw err;
     }
