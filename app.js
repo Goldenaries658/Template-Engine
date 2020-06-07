@@ -90,6 +90,7 @@ const createEmployee = async (role) => {
 const createTeam = async () => {
   // Function to display employee details
   const displayInfo = async (employee) => {
+    console.clear()
     console.log(
       '---------------------------------------------------------------'.bold
         .green
@@ -195,7 +196,6 @@ const createTeam = async () => {
     if (err) {
       throw err;
     }
-    console.log
     console.log('Done!'.magenta.bold);
   });
 };
