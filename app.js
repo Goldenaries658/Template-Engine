@@ -3,8 +3,8 @@ const path = require('path');
 const fs = require('fs');
 const header = require('./lib/Header');
 
-const OUTPUT_DIR = path.resolve(__dirname, 'output');
-const outputPath = path.join(OUTPUT_DIR, 'team.html');
+const OUTPUT_DIR = path.resolve(__dirname, '/output');
+const outputPath = path.join(OUTPUT_DIR, '/team.html');
 
 const render = require('./lib/htmlRenderer');
 const createEmployee = require('./lib/createEmployee')
@@ -114,7 +114,7 @@ const createTeam = async () => {
   console.clear();
   console.log(header);
   console.log('Writing File!'.magenta.bold);
-  fs.writeFile(__dirname + '/output/team.html', render(teamArray), (err) => {
+  fs.writeFile(outputPath, render(teamArray), (err) => {
     if (err) {
       throw err;
     }
