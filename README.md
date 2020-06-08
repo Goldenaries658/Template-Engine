@@ -17,8 +17,6 @@ A CLI application for generating a software engineering team roster
 - [Tests](#tests)
 - [Questions](questions)
 
-<hr />
-
 ## Installation
 
 Simply clone or download the repo and run `$ npm install` in the CLI, then `$ node index.js` to start the app. Alternatively _windows users_ can run start.bat.
