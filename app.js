@@ -1,6 +1,6 @@
 const fs = require('fs');
 const colors = require('colors');
-const header = require('./lib/Header');
+const printHeader = require('./lib/printHeader');
 
 const outputPath = `${__dirname}/output/team.html`;
 
@@ -11,8 +11,7 @@ const { confirmSelection, confirmEmployees } = require('./lib/inputConfirm');
 const createTeam = async () => {
   const teamArray = [];
   // Entering manager details
-  console.clear();
-  console.log(header);
+  printHeader();
   console.log('First, enter in manager details:'.magenta.bold);
   let managerChosen = false;
   let manager;
@@ -24,8 +23,7 @@ const createTeam = async () => {
   teamArray.push(manager);
 
   // Entering employee details
-  console.clear();
-  console.log(header);
+  printHeader();
   console.log('Next add a team member:'.magenta.bold);
 
   // Nested while loop allows infinite number of employees to be entered whilst still
@@ -42,10 +40,9 @@ const createTeam = async () => {
     // Confirming whether list is complete
     employeeListComplete = await confirmEmployees(teamArray);
   }
-  console.clear();
-  console.log(header);
-  console.log('Writing File!'.magenta.bold);
-  fs.writeFile(outputPath, render(teamArray), (err) => {
+  printHeader();
+
+ fs.writeFile(outputPath, render(teamArray), (err) => {
     if (err) {
       throw err;
     }
