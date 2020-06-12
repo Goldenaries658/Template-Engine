@@ -41,8 +41,8 @@ const createTeam = async () => {
     employeeListComplete = await confirmEmployees(teamArray);
   }
   printHeader();
-
- fs.writeFile(outputPath, render(teamArray), (err) => {
+  console.log('Writing File!'.magenta.bold);
+  fs.writeFile(outputPath, render(teamArray), (err) => {
     if (err) {
       throw err;
     }
