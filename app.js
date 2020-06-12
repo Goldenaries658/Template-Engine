@@ -1,4 +1,5 @@
 const fs = require('fs');
+const colors = require('colors');
 const header = require('./lib/Header');
 
 const outputPath = `${__dirname}/output/team.html`;
